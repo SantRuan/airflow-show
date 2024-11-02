@@ -11,6 +11,8 @@ def print_random_quote():
 def print_welcome():
     return "welcome Ruan"
 
+def print_welcome():
+    return "welcome dev-qa"
 with DAG(
     "my_first_dag",
     default_args={
