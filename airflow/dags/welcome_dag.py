@@ -11,8 +11,8 @@ def print_random_quote():
 def print_welcome():
     return "welcome Ruan"
 
-def print_welcome():
-    return "welcome dev-qa"
+def print_fixing():
+    return "fixing"
 with DAG(
     "my_first_dag",
     default_args={
@@ -29,6 +29,12 @@ with DAG(
     catchup=False,
     tags=["example"]
 ) as dag:
+    
+    fixing = PythonOperator(
+        task_id="print_fixing",
+        python_callable=print_fixing,
+        dag=dag
+    )
     t1 = PythonOperator(
         task_id="print_welcome",
         python_callable=print_welcome,
@@ -40,4 +46,4 @@ with DAG(
         dag=dag
     )
 
-t1 >> t2
+fixing >> t1 >> t2
